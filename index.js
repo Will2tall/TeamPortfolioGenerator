@@ -22,15 +22,7 @@ const promptUser = () => {
         {
             type: 'number',
             name: 'id',
-            message: "Please enter manager's ID number (required)",
-            validate: idInput => {
-                if (idInput === Number) {
-                    return true;
-                } else {
-                    console.log('Please enter a number for ID number')
-                    return false;
-                }
-            }
+            message: "Please enter manager's ID number (required)"
         },
         {
             type: 'input',
@@ -48,20 +40,15 @@ const promptUser = () => {
         {
             type: 'number',
             name: 'officeNumber',
-            message: "Please enter manager's office number (required)",
-            validate: officeNumberInput => {
-                if (officeNumberInput === Number) {
-                    return true;
-                } else {
-                    console.log('Please enter a number for office')
-                    return false;
-                }
-            }
+            message: "Please enter manager's office number (required)"
         }
     ]);
 }
 
 const employeeQuestion = (answer) => {
+    if(!answer) {
+        answer = ''
+    }
     inquirer.prompt({
             type: 'list',
             name: 'employeeList',
@@ -89,14 +76,6 @@ const engineerQuestion = () => {
             type: 'number',
             name: 'id',
             message: "Please enter engineer's ID number (required)",
-            validate: idInput => {
-                if (idInput === Number) {
-                    return true;
-                } else {
-                    console.log('Please enter a number for ID number')
-                    return false;
-                }
-            }
         },
         {
             type: 'input',
@@ -125,6 +104,7 @@ const engineerQuestion = () => {
             }
         }
     ])
+    .then(employeeQuestion)
 }
 
 const internQuestion = () => {
@@ -145,15 +125,7 @@ const internQuestion = () => {
         {
             type: 'number',
             name: 'id',
-            message: "Please enter intern's ID number (required)",
-            validate: idInput => {
-                if (idInput === Number) {
-                    return true;
-                } else {
-                    console.log('Please enter a number for ID number')
-                    return false;
-                }
-            }
+            message: "Please enter intern's ID number (required)"
         },
         {
             type: 'input',
@@ -182,6 +154,7 @@ const internQuestion = () => {
             }
         }
     ])
+    .then(employeeQuestion)
 }
 
 promptUser()
@@ -189,9 +162,10 @@ promptUser()
     .then(answer => {
         if(answer === 'Engineer') {
             engineerQuestion
-        } else if (answer === 'Intern') {
+        } else if(answer === 'Intern') {
             internQuestion
         } else {
-            
+
         }
     })
+    
