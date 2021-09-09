@@ -45,10 +45,7 @@ const promptUser = () => {
     ]);
 }
 
-const employeeQuestion = (answer) => {
-    if(!answer) {
-        answer = ''
-    }
+const employeeQuestion = () => {
     inquirer.prompt({
             type: 'list',
             name: 'employeeList',
@@ -159,13 +156,12 @@ const internQuestion = () => {
 
 promptUser()
     .then(employeeQuestion)
-    .then(answer => {
-        if(answer === 'Engineer') {
+        if(({ employeeList: 'Engineer' })) {
             engineerQuestion
-        } else if(answer === 'Intern') {
+        } else if(({ employeeList: 'Intern' })) {
             internQuestion
         } else {
 
         }
-    })
+    
     
