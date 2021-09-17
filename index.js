@@ -1,10 +1,11 @@
 const inquirer = require('inquirer');
-const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const promptUser = () => {
+let team = [];
+
+const promptUser = (e) => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -42,19 +43,33 @@ const promptUser = () => {
             name: 'officeNumber',
             message: "Please enter manager's office number (required)"
         }
-    ]);
+    ]).then(function(){
+        team.push(new Manager)
+    }).then(employeeQuestion)
 }
+
 
 const employeeQuestion = () => {
     inquirer.prompt({
             type: 'list',
             name: 'employeeList',
             message: 'Please select an option from the list of "Employees" that you would like to add to your team.  Note: If all employees are added, simply select "finish"',
-            choices: ['Engineer', 'Intern', 'Finish']    
+            choices: ['Engineer', 'Intern', 'Manager', 'Finish']    
         }
-    )}
+    ).then(function(answer){
+        if(answer.employeeList === 'Engineer'){
+            engineerQuestion();
+        }else if(answer.employeeList === 'Intern'){
+            internQuestion();
+        }else if (answer.employeeList === 'Manager'){
+            promptUser();
+        } else {
+            console.log(team);
+            return;
+        }
+    })}
 
-const engineerQuestion = () => {
+const engineerQuestion = (e) => {
     inquirer.prompt([
         {
             type: 'input',
@@ -101,10 +116,12 @@ const engineerQuestion = () => {
             }
         }
     ])
-    .then(employeeQuestion)
+    .then(function() {
+        team.push(new Engineer)
+    }).then(employeeQuestion)
 }
 
-const internQuestion = () => {
+const internQuestion = (e) => {
     inquirer.prompt([
         {
             type: 'input',
@@ -151,17 +168,11 @@ const internQuestion = () => {
             }
         }
     ])
-    .then(employeeQuestion)
+    .then(function() {
+        team.push(new Intern)
+    }).then(employeeQuestion)
 }
 
 promptUser()
-    .then(employeeQuestion)
-        if(({ employeeList: 'Engineer' })) {
-            engineerQuestion
-        } else if(({ employeeList: 'Intern' })) {
-            internQuestion
-        } else {
 
-        }
-    
     
