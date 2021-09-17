@@ -5,7 +5,7 @@ const Intern = require('./lib/Intern');
 
 let team = [];
 
-const promptUser = (e) => {
+const promptUser = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -69,7 +69,7 @@ const employeeQuestion = () => {
         }
     })}
 
-const engineerQuestion = (e) => {
+const engineerQuestion = () => {
     inquirer.prompt([
         {
             type: 'input',
@@ -121,7 +121,7 @@ const engineerQuestion = (e) => {
     }).then(employeeQuestion)
 }
 
-const internQuestion = (e) => {
+const internQuestion = () => {
     inquirer.prompt([
         {
             type: 'input',
