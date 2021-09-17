@@ -3,6 +3,8 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+const index = require('./src/writeFile')
+
 let team = [];
 
 const promptUser = () => {
@@ -43,8 +45,8 @@ const promptUser = () => {
             name: 'officeNumber',
             message: "Please enter manager's office number (required)"
         }
-    ]).then(function(){
-        team.push(new Manager)
+    ]).then(function(a){
+        team.push(new Manager(a.name, a.id, a.email, a.officeNumber))
     }).then(employeeQuestion)
 }
 
@@ -65,7 +67,7 @@ const employeeQuestion = () => {
             promptUser();
         } else {
             console.log(team);
-            return;
+            return index;
         }
     })}
 
@@ -116,8 +118,8 @@ const engineerQuestion = () => {
             }
         }
     ])
-    .then(function() {
-        team.push(new Engineer)
+    .then(function(answer) {
+        team.push(new Engineer(answer.name, answer.id, answer.email, answer.github))
     }).then(employeeQuestion)
 }
 
@@ -168,11 +170,11 @@ const internQuestion = () => {
             }
         }
     ])
-    .then(function() {
-        team.push(new Intern)
+    .then(function(b) {
+        team.push(new Intern(b.name, b.id, b.email, b.school))
     }).then(employeeQuestion)
 }
 
 promptUser()
 
-    
+module.exports = team;    
