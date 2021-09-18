@@ -3,7 +3,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const writeHtml = require('./src/writeFile')
+const writeHtml = require('./src/writeFile.js')
 
 let team = [];
 
@@ -67,9 +67,8 @@ const employeeQuestion = () => {
             promptUser();
         } else {
             console.log(team);
+            return writeHtml();
         }
-    }).then(data => {
-        return writeHtml(data);
     })
 }
 

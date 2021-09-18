@@ -1,7 +1,7 @@
 const team = require("index.js");
 const fs = require("fs");
 
-function createTeam(team) {
+function createTeam() {
   function showManager(manager) {
     return `
         <row>
@@ -95,15 +95,14 @@ function generateHTML(team) {
         </div>
     </header>
     <section>
-
-            ${createTeam(team)}
+      ${createTeam(team)}
     </section>
     `;
 }
 
 const writeHTML = data => {
   return new Promise((resolve, reject) => {
-    fs.writeFileSync("./dist/index.html", generateHTML(data), (err) => {
+    fs.writeFile("./dist/index.html", generateHTML(data), (err) => {
       if (err) {
         reject(err);
         return;
