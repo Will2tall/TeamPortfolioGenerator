@@ -1,7 +1,7 @@
-const team = require("index.js");
+const team = require("../index");
 const fs = require("fs");
 
-function createTeam() {
+function createTeam(team) {
   function showManager(manager) {
     return `
         <row>
@@ -101,6 +101,7 @@ function generateHTML(team) {
 }
 
 const writeHTML = data => {
+  console.log('data', data)
   return new Promise((resolve, reject) => {
     fs.writeFile("./dist/index.html", generateHTML(data), (err) => {
       if (err) {
