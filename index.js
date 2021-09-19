@@ -66,7 +66,7 @@ const employeeQuestion = () => {
         }else if (answer.employeeList === 'Manager'){
             promptUser();
         } else {
-            console.log('team inside employee question', team);
+            console.log('team inside employee question');
             return writeHtml(team);
         }
     })

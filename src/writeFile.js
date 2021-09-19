@@ -4,49 +4,49 @@ const fs = require("fs");
 function createTeam(team) {
   function showManager(manager) {
     return `
-        <row>
-        <div class="card text-dark bg-info mb-3" style="max-width: 18rem;">
+      <div class="col-3">
+        <div class="card text-dark bg-info mb-3 shadow p-3 mb-5 bg-body rounded" style="max-width: 18rem;">
             <div class="card-header">Manager</div>
                 <div class="card-body">
                     <h5 class="card-title">${manager.getName()}</h5>
                     <h5 class="card-title">${manager.getId()}</h5>
-                    <h5 class="card-title">${manager.getEmail()}</h5>
+                    <h5 class="card-title"><a href="mailto: ${manager.getEmail()}">${manager.getEmail()}</a></h5>
                     <h5 class="card-title">${manager.getOfficeNumber()}</h5>
                 </div>
         </div>
-        </row>
+      </div>
             `;
   }
 
   function showEngineer(engineer) {
     return `
-    <row>
-    <div class="card text-dark bg-info mb-3" style="max-width: 18rem;">
+    <div class="col-3">
+    <div class="card text-dark bg-info mb-3 shadow p-3 mb-5 bg-body rounded" style="max-width: 18rem;">
         <div class="card-header">Engineer</div>
             <div class="card-body">
                 <h5 class="card-title">${engineer.getName()}</h5>
                 <h5 class="card-title">${engineer.getId()}</h5>
-                <h5 class="card-title">${engineer.getEmail()}</h5>
-                <h5 class="card-title">${engineer.getOfficeNumber()}</h5>
+                <h5 class="card-title"><a href="mailto: ${engineer.getEmail()}">${engineer.getEmail()}</a></h5>
+                <h5 class="card-title"><a href="https://github.com/${engineer.getGitHub()}" target="_blank">https://github.com/${engineer.getGitHub()}</a></h5>
             </div>
     </div>
-    </row>
+    </div>
         `;
   }
 
   function showIntern(intern) {
     return `
-    <row>
-        <div class="card text-dark bg-info mb-3" style="max-width: 18rem;">
+      <div class="col-3">
+        <div class="card text-dark bg-info mb-3 shadow p-3 mb-5 bg-body rounded" style="max-width: 18rem;">
             <div class="card-header">Intern</div>
                 <div class="card-body">
                     <h5 class="card-title">${intern.getName()}</h5>
                     <h5 class="card-title">${intern.getId()}</h5>
-                    <h5 class="card-title">${intern.getEmail()}</h5>
-                    <h5 class="card-title">${intern.getOfficeNumber()}</h5>
+                    <h5 class="card-title"><a href="mailto: ${intern.getEmail()}">${intern.getEmail()}</a></h5>
+                    <h5 class="card-title">${intern.getSchool()}</h5>
                 </div>
         </div>
-        </row>
+      </div>
     `;
   }
 
@@ -58,22 +58,6 @@ function createTeam(team) {
 
   return html.join("")
 }
-
-// function showManager() {
-//   const manager = team.filter((a) => a.Manager);
-
-//   for (i = 0; i < manager.length; i++) {
-//     return `
-//         <div class="card-header">${manager.name[i]}</div>
-//             <div class="card-body">
-//                 <h5 class="card-title">${manager.id[i]}</h5>
-//                 <h5 class="card-title">${manager.email[i]}</h5>
-//                 <h5 class="card-title">${manager.officeNumber[i]}</h5>
-//             </div>
-//         `;
-//   }
-// }
-
 
 function generateHTML(team) {
   return `
@@ -90,18 +74,20 @@ function generateHTML(team) {
 
     <body>
     <header>
-        <div class="bg-primary.bg-gradient">
+        <div class="p-3 mb-2 bg-primary.bg-gradient text-dark">
             <p class="text-center fs-1">MY TEAM</p>
         </div>
     </header>
-    <section>
+    <div class="container">
+    <div class="row">
       ${createTeam(team)}
-    </section>
+    </div>
+    </div>
     `;
 }
 
 const writeHTML = data => {
-  console.log('data', data)
+  //console.log('data', data)
   return new Promise((resolve, reject) => {
     fs.writeFile("./dist/index.html", generateHTML(data), (err) => {
       if (err) {
@@ -110,7 +96,7 @@ const writeHTML = data => {
       }
       resolve({
         ok: true,
-        message: "My team webpage created!",
+        message: "My team webpage created!"
       });
     });
   });
